@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Wheather App</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Lobster&family=Lora:ital,wght@1,400;1,500;1,600&family=Titillium+Web:ital,wght@0,300;0,400;1,700&family=Varela&family=Varela+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Lobster&family=Lora:ital,wght@1,400;1,500;1,600&family=Tektur:wght@400;500&family=Titillium+Web:ital,wght@0,300;0,400;1,700&family=Varela&family=Varela+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main">
+            <div class="left">
+                <h1 class="build">Build A  <span class="app">Wheather App</span></h1>
+                <h1 class="using">UsinG <span class="build"> Javascript </span></h1>
+            </div>
+
+            <div class="right">
+                <div class="box">.</div>
+               
+              
+                <div class="card">
+                    <div class="search">
+                        <input type="text" placeholder="enter city name"/>
+                        <button>  <img src="img1.jpg" class="img" /></button>
+                    </div>
+                    <div class="weather">
+                    <img src="cloud1.png" class="cloud" />
+                    <h1 class="temp">22 °c</h1>
+                    <h2 class="city">Lahore</h2>
+                    <div class="display">
+                        <div class="d1">
+                            <h6 class="hum">Humidity</h6>
+                            <h6 class="humidity">64%</h6>
+                        </div>
+                        <div class="d2">
+                            <h6 class="wind1">Wind Speed</h6>
+                            <h6 class="wind">64%</h6>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+              
+                <div class="box4">.</div>
+            </div>
+
+        </div>
+        <script>
+            const apiKey = "e4b9c450510be999389b0a3e2a589b4a";
+            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        
+            const searchBox = document.querySelector(".search input");
+            const searchBtn = document.querySelector(".search button");
+        
+            async function checkWeather(city){
+                const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+                var data = await response.json();
+        
+                console.log(data);
+        
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector('.temp').innerHTML = Math.round(data.main.temp)+ "°c";
+                document.querySelector('humidity').innerHTML = data.main.humidity + "%";
+                document.querySelector('wind').innerHTML = data.wind.speed + "km/h";
+            }
+        
+            searchBtn.addEventListener("click", () => {
+                checkWeather(searchBox.value);
+            })
+        
+        
+        </script>
+        
+    </body>
+
+</html>
